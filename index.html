@@ -2,7 +2,8 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">    
     <title>Stroke Screening Application</title>
     
     <!-- โค้ดเปลี่ยนโลโก้แอป -->
@@ -422,6 +423,22 @@
             // ➡️ เดินหน้าไปหน้า 9 (หน้าปุ่มโทรออกด่วน)
             navigateTo(9);
         }
+    <!-- ป้องกันดับเบิลแตะและ pinch zoom บน iPhone -->
+        let lastTouchEnd = 0;
+        
+        document.addEventListener('touchend', function (event) {
+            const now = Date.now();
+
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+
+            lastTouchEnd = now;
+        }, { passive: false });
+
+        document.addEventListener('gesturestart', function (event) {
+            event.preventDefault();
+        });
     </script>
 </body>
 </html>
