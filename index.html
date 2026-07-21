@@ -371,10 +371,10 @@
             // แสดงผลลัพธ์และเตือนเรื่อง Golden Hour (4.5 ชม.)
             if (diffMins > 270) { // เกิน 4.5 ชั่วโมง
                 resultBox.className = "p-3 rounded-xl text-center font-medium text-sm bg-rose-50 border border-rose-200 text-rose-700";
-                resultText.innerHTML = `⏳ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>⚠️ เกินช่วง 4.5 ชม. (Golden Hour) โปรดเร่งนำส่ง!`;
+                resultText.innerHTML = `⏳ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>⚠️ เกินช่วง 4.5 ชม. (Golden Hour) `;
             } else { // ยังอยู่ในช่วง 4.5 ชั่วโมง
                 resultBox.className = "p-3 rounded-xl text-center font-medium text-sm bg-emerald-50 border border-emerald-200 text-emerald-700";
-                resultText.innerHTML = `⏱️ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>✅ ยังอยู่ในช่วง 4.5 ชม. (Golden Hour)`;
+                resultText.innerHTML = `⏱️ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>✅ ยังอยู่ในช่วง 4.5 ชม. (Golden Hour) เข้าเกณฑ์ Stroke Fast Track `;
             }
         }
 
