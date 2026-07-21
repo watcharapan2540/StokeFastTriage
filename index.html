@@ -23,142 +23,141 @@
     <style>
         body { font-family: 'Prompt', sans-serif; }
         .page { display: none; }
-        /* 🔧 แก้ไขตรงนี้: เพิ่ม flex-col และ w-full เพื่อไม่ให้โครงสร้างหน้าลอยหรือเบี้ยว */
-        .page.active { display: flex; flex-direction: column; width: 100%; height: 100%; flex: 1; justify-content: space-between; }
+        .page.active { display: flex; }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col items-center justify-center p-4">
 
     <!-- Container สำหรับควบคุมขนาดหน้าจอให้อารมณ์เหมือนแอพมือถือ -->
-    <div class="w-full max-w-md bg-white rounded-3xl shadow-xl border border-slate-100 p-6 min-h-[620px] flex flex-col justify-between overflow-hidden relative">  
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-xl border border-slate-100 p-6 min-h-[600px] flex flex-col justify-between overflow-hidden relative">  
       
         <!-- ================= PAGE 1: HOME ================= -->
-        <div id="page1" class="page active">
-            <div class="flex-1 flex flex-col items-center justify-center text-center space-y-8 my-auto w-full">
-                <div class="space-y-3">
-                    <div class="inline-flex p-4 bg-blue-50 text-blue-600 rounded-full mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-12 h-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.745 3.745 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-                        </svg>
-                    </div>
-                    <h1 class="text-2xl font-bold text-slate-800">แอปพลิเคชันคัดกรอง<br><span class="text-blue-600">อาการโรคหลอดเลือดสมอง</span></h1>
-                    <p class="text-sm text-slate-500 font-light">ประเมินอาการเบื้องต้นตามหลัก BE FAST</p>
+        <div id="page1" class="page active flex-col items-center justify-center text-center my-auto space-y-8 animate-fade-in">
+            <div class="space-y-3">
+                <div class="inline-flex p-4 bg-blue-50 text-blue-600 rounded-full mb-2">
+                    <svg xmlns="http://www.w3.org/2000/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-12 h-12">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.745 3.745 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                    </svg>
                 </div>
-
-                <div class="w-full space-y-4">
-                    <button onclick="navigateTo(2)" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-2xl shadow-lg transition-all text-lg active:scale-95">
-                        เริ่มประเมิน
-                    </button>
-                    <a href="tel:0817080138" class="w-full flex items-center justify-center bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-medium py-4 px-6 rounded-2xl transition-all text-base active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.802-5.176-4.154-6.978-6.978l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-                        </svg>
-                        โทรประสาน รพศ. สว่างฯ
-                    </a>
-                </div>
+                <h1 class="text-2xl font-bold text-slate-800">แอปพลิเคชันคัดกรอง<br><span class="text-blue-600">อาการโรคหลอดเลือดสมอง</span></h1>
+                <p class="text-sm text-slate-500 font-light">ประเมินอาการเบื้องต้นตามหลัก BE FAST</p>
             </div>
-            <div class="text-xs text-slate-400 font-light pt-4 border-t w-full text-center mt-auto">พัฒนาโดย นางสาววัชราพรรณ ตันเสนา นักฉุกเฉินการแพทย์</div>
+
+            <div class="w-full space-y-4">
+                <button onclick="navigateTo(2)" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-2xl shadow-lg transition-all text-lg active:scale-95">
+                    เริ่มประเมิน
+                </button>
+                <a href="tel:0817080138" class="w-full flex items-center justify-center bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-medium py-4 px-6 rounded-2xl transition-all text-base active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.802-5.176-4.154-6.978-6.978l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                    </svg>
+                    โทรประสาน รพศ. สว่างฯ
+                </a>
+            </div>
+            <div class="text-xs text-slate-400 font-light pt-4 border-t w-full">พัฒนาโดย นางสาววัชราพรรณ ตันเสนา นักฉุกเฉินการแพทย์</div>
         </div>
 
         <!-- ================= PAGES 2 - 6: BE FAST ASSESSMENT ================= -->
         <!-- หน้า 2: B -->
-        <div id="page2" class="page">
-            <div class="text-center space-y-3 w-full">
-                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 2 จาก 9</span>
+        <div id="page2" class="page flex-col justify-between h-full flex-1">
+            <div class="text-center space-y-4">
+                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 2 จาก 8</span>
                 <h2 class="text-xl font-bold text-slate-800">มีอาการเหล่านี้หรือไม่ ?</h2>
                 <div class="bg-rose-50 rounded-2xl p-4 border border-rose-100 flex flex-col items-center">
                     <div class="text-4xl font-extrabold text-rose-500 mb-1">B</div>
                     <div class="text-base font-semibold text-rose-700 mb-2">Balance (สมดุล)</div>
-                    <img src="balance.jpg" alt="Balance" class="w-24 h-24 object-cover rounded-xl mb-2 bg-white shadow-sm border border-rose-100/50">
+                    <!-- แทรกรูปภาพตรงนี้ สามารถเปลี่ยนชื่อไฟล์ใน src=" " ได้ตามต้องการ -->
+                    <img src="balance.jpg" alt="Balance" class="w-28 h-28 object-cover rounded-xl mb-3 bg-white shadow-sm border border-rose-100/50">
                     <p class="text-slate-600 text-sm">เวียนศีรษะ เดินเซ เดินไม่ตรง หรือทรงตัวลำบาก</p>
                 </div>
-                <div class="grid grid-cols-1 gap-2 pt-1 w-full" id="options-p2"></div>
+                <div class="grid grid-cols-1 gap-2.5 pt-2" id="options-p2"></div>
             </div>
-            <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-100 w-full">
+            <div class="flex justify-between items-center pt-4 mt-auto border-t border-slate-100">
                 <button onclick="navigateTo(1)" class="text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center">◀ ย้อนกลับ</button>
                 <button onclick="navigateTo(3)" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">ถัดไป ▶</button>
             </div>
         </div>
 
         <!-- หน้า 3: E -->
-        <div id="page3" class="page">
-            <div class="text-center space-y-3 w-full">
-                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 3 จาก 9</span>
+        <div id="page3" class="page flex-col justify-between h-full flex-1">
+            <div class="text-center space-y-4">
+                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 3 จาก 8</span>
                 <h2 class="text-xl font-bold text-slate-800">มีอาการเหล่านี้หรือไม่ ?</h2>
                 <div class="bg-rose-50 rounded-2xl p-4 border border-rose-100 flex flex-col items-center">
                     <div class="text-4xl font-extrabold text-rose-500 mb-1">E</div>
                     <div class="text-base font-semibold text-rose-700 mb-2">Eyes (สายตา)</div>
-                    <img src="eyes.jpg" alt="Eyes" class="w-24 h-24 object-cover rounded-xl mb-2 bg-white shadow-sm border border-rose-100/50">
+                    <img src="eyes.jpg" alt="Eyes" class="w-28 h-28 object-cover rounded-xl mb-3 bg-white shadow-sm border border-rose-100/50">
                     <p class="text-slate-600 text-sm">ตามัว มองเห็นภาพไม่ชัด หรือเห็นภาพซ้อนทันทีทันใด</p>
                 </div>
-                <div class="grid grid-cols-1 gap-2 pt-1 w-full" id="options-p3"></div>
+                <div class="grid grid-cols-1 gap-2.5 pt-2" id="options-p3"></div>
             </div>
-            <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-100 w-full">
+            <div class="flex justify-between items-center pt-4 mt-auto border-t border-slate-100">
                 <button onclick="navigateTo(2)" class="text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center">◀ ย้อนกลับ</button>
                 <button onclick="navigateTo(4)" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">ถัดไป ▶</button>
             </div>
         </div>
 
         <!-- หน้า 4: F -->
-        <div id="page4" class="page">
-            <div class="text-center space-y-3 w-full">
-                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 4 จาก 9</span>
+        <div id="page4" class="page flex-col justify-between h-full flex-1">
+            <div class="text-center space-y-4">
+                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 4 จาก 8</span>
                 <h2 class="text-xl font-bold text-slate-800">มีอาการเหล่านี้หรือไม่ ?</h2>
                 <div class="bg-rose-50 rounded-2xl p-4 border border-rose-100 flex flex-col items-center">
                     <div class="text-4xl font-extrabold text-rose-500 mb-1">F</div>
                     <div class="text-base font-semibold text-rose-700 mb-2">Face (ใบหน้า)</div>
-                    <img src="face.jpg" alt="Face" class="w-24 h-24 object-cover rounded-xl mb-2 bg-white shadow-sm border border-rose-100/50">
+                    <img src="face.jpg" alt="Face" class="w-28 h-28 object-cover rounded-xl mb-3 bg-white shadow-sm border border-rose-100/50">
                     <p class="text-slate-600 text-sm">ปากเบี้ยว หน้าเบี้ยว ด้านใดด้านหนึ่ง ยิ้มแล้วมุมปากตก</p>
                 </div>
-                <div class="grid grid-cols-1 gap-2 pt-1 w-full" id="options-p4"></div>
+                <div class="grid grid-cols-1 gap-2.5 pt-2" id="options-p4"></div>
             </div>
-            <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-100 w-full">
+            <div class="flex justify-between items-center pt-4 mt-auto border-t border-slate-100">
                 <button onclick="navigateTo(3)" class="text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center">◀ ย้อนกลับ</button>
                 <button onclick="navigateTo(5)" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">ถัดไป ▶</button>
             </div>
         </div>
 
         <!-- หน้า 5: A -->
-        <div id="page5" class="page">
-            <div class="text-center space-y-3 w-full">
-                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 5 จาก 9</span>
+        <div id="page5" class="page flex-col justify-between h-full flex-1">
+            <div class="text-center space-y-4">
+                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 5 จาก 8</span>
                 <h2 class="text-xl font-bold text-slate-800">มีอาการเหล่านี้หรือไม่ ?</h2>
                 <div class="bg-rose-50 rounded-2xl p-4 border border-rose-100 flex flex-col items-center">
                     <div class="text-4xl font-extrabold text-rose-500 mb-1">A</div>
                     <div class="text-base font-semibold text-rose-700 mb-2">Arm (แขนขา)</div>
-                    <img src="arm.jpg" alt="Arm" class="w-24 h-24 object-cover rounded-xl mb-2 bg-white shadow-sm border border-rose-100/50">
+                    <img src="arm.jpg" alt="Arm" class="w-28 h-28 object-cover rounded-xl mb-3 bg-white shadow-sm border border-rose-100/50">
                     <p class="text-slate-600 text-sm">แขน ขา อ่อนแรง หรือชาครึ่งซีก ยกแขนไม่ขึ้น</p>
                 </div>
-                <div class="grid grid-cols-1 gap-2 pt-1 w-full" id="options-p5"></div>
+                <div class="grid grid-cols-1 gap-2.5 pt-2" id="options-p5"></div>
             </div>
-            <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-100 w-full">
+            <div class="flex justify-between items-center pt-4 mt-auto border-t border-slate-100">
                 <button onclick="navigateTo(4)" class="text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center">◀ ย้อนกลับ</button>
                 <button onclick="navigateTo(6)" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">ถัดไป ▶</button>
             </div>
         </div>
 
         <!-- หน้า 6: S -->
-        <div id="page6" class="page">
-            <div class="text-center space-y-3 w-full">
-                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 6 จาก 9</span>
+        <div id="page6" class="page flex-col justify-between h-full flex-1">
+            <div class="text-center space-y-4">
+                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 6 จาก 8</span>
                 <h2 class="text-xl font-bold text-slate-800">มีอาการเหล่านี้หรือไม่ ?</h2>
                 <div class="bg-rose-50 rounded-2xl p-4 border border-rose-100 flex flex-col items-center">
                     <div class="text-4xl font-extrabold text-rose-500 mb-1">S</div>
                     <div class="text-base font-semibold text-rose-700 mb-2">Speech (การพูด)</div>
-                    <img src="speech.jpg" alt="Speech" class="w-24 h-24 object-cover rounded-xl mb-2 bg-white shadow-sm border border-rose-100/50">
+                    <img src="speech.jpg" alt="Speech" class="w-28 h-28 object-cover rounded-xl mb-3 bg-white shadow-sm border border-rose-100/50">
                     <p class="text-slate-600 text-sm">พูดไม่ชัด พูดอ้อแอ้ นึกคำไม่ออก หรือพูดไม่รู้เรื่อง</p>
                 </div>
-                <div class="grid grid-cols-1 gap-2 pt-1 w-full" id="options-p6"></div>
+                <div class="grid grid-cols-1 gap-2.5 pt-2" id="options-p6"></div>
             </div>
-            <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-100 w-full">
+            <div class="flex justify-between items-center pt-4 mt-auto border-t border-slate-100">
                 <button onclick="navigateTo(5)" class="text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center">◀ ย้อนกลับ</button>
                 <button onclick="navigateTo(7)" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">ถัดไป ▶</button>
             </div>
         </div>
 
+
         <!-- ================= PAGE 7: TIME ASSESSMENT ================= -->
-        <div id="page7" class="page">
-            <div class="space-y-4 w-full my-auto">
+        <div id="page7" class="page flex-col justify-between h-full flex-1">
+            <div class="space-y-5 my-auto">
                 <div class="text-center">
                     <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 7 จาก 9</span>
                     <div class="text-5xl font-extrabold text-red-600 mt-2">T</div>
@@ -180,34 +179,34 @@
                 </div>
             </div>
 
-            <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-100 w-full">
+            <div class="flex justify-between items-center pt-4 mt-auto border-t border-slate-100">
                 <button onclick="navigateTo(6)" class="text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center">◀ ย้อนกลับ</button>
                 <button onclick="navigateTo(8)" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">ระบุข้อมูลผู้ป่วย ▶</button>
             </div>
         </div>
 
         <!-- ================= PAGE 8: PATIENT DATA FORM ================= -->
-        <div id="page8" class="page">
-            <div class="space-y-3 w-full">
+        <div id="page8" class="page flex-col justify-between h-full flex-1">
+            <div class="space-y-4">
                 <div class="text-center">
                     <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 8 จาก 9</span>
                     <h2 class="text-xl font-bold text-slate-800 mt-1">ระบุข้อมูลผู้ป่วย</h2>
                 </div>
 
-                <form id="patientForm" onsubmit="submitForm(event)" class="space-y-3 text-sm">
+                <form id="patientForm" onsubmit="submitForm(event)" class="space-y-4 text-sm">
                     <div>
                         <label class="block text-slate-700 font-medium mb-1">ชื่อ - สกุล <span class="text-red-500">*</span></label>
-                        <input type="text" id="name" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800" placeholder="กรุณาระบุชื่อ-นามสกุล">
+                        <input type="text" id="name" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800" placeholder="กรุณาระบุชื่อ-นามสกุล">
                     </div>
 
                     <div>
                         <label class="block text-slate-700 font-medium mb-1">โรคประจำตัว</label>
-                        <input type="text" id="disease" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800" placeholder="เช่น เบาหวาน, ความดัน (ถ้ามี)">
+                        <input type="text" id="disease" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800" placeholder="เช่น เบาหวาน, ความดัน (ถ้ามี)">
                     </div>
 
                     <div>
                         <label class="block text-slate-700 font-medium mb-1">หน่วยปฏิบัติการ <span class="text-red-500">*</span></label>
-                        <select id="unit" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800 appearance-none">
+                        <select id="unit" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800 appearance-none">
                             <option value="" disabled selected>เลือกหน่วยปฏิบัติการ</option>
                             <option value="รพร.สว่างแดนดิน">รพร.สว่างแดนดิน</option>
                             <option value="กู้ภัยสว่างแดนดินธรรมสถาน">กู้ภัยสว่างแดนดินธรรมสถาน</option>
@@ -229,34 +228,35 @@
 
                     <div>
                         <label class="block text-slate-700 font-medium mb-1">เบอร์โทรติดต่อญาติ <span class="text-red-500">*</span></label>
-                        <input type="tel" id="phone" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800" placeholder="กรุณาระบุเบอร์โทรศัพท์">
+                        <input type="tel" id="phone" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800" placeholder="กรุณาระบุเบอร์โทรศัพท์">
                     </div>
 
+                    <!-- 📝 เพิ่มกล่องหมายเหตุ (เพิ่มเติม) -->
                     <div>
                         <label class="block text-slate-700 font-medium mb-1">หมายเหตุ / ข้อมูลเพิ่มเติม</label>
-                        <textarea id="note" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800 resize-none" placeholder="เช่น ยาที่กินประจำ, อาการเพิ่มเติม"></textarea>
+                        <textarea id="note" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800 resize-none" placeholder="เช่น ยาที่กินประจำ, อาการเพิ่มเติม หรือจุดสังเกตบ้าน (ถ้ามี)"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl shadow-md transition-all text-base mt-2 active:scale-95">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 px-6 rounded-xl shadow-md transition-all text-base mt-2 active:scale-95">
                         ส่งข้อมูลและดูเบอร์โทรด่วน
                     </button>
                 </form>
             </div>
 
-            <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-100 w-full">
+            <div class="flex justify-between items-center pt-4 mt-4 border-t border-slate-100">
                 <button onclick="navigateTo(7)" class="text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center">◀ ย้อนกลับ</button>
                 <div class="w-16"></div> 
             </div>
         </div>
 
-        <!-- ================= PAGE 9: EMERGENCY CALLS ================= -->
-        <div id="page9" class="page">
-            <div class="text-center space-y-6 w-full my-auto">
+        <!-- ================= PAGE 9: EMERGENCY CALLS (NEW PAGE) ================= -->
+        <div id="page9" class="page flex-col justify-between h-full flex-1">
+            <div class="text-center space-y-6 my-auto">
                 <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 9 จาก 9</span>
                 
                 <div class="space-y-2">
                     <div class="inline-flex p-4 bg-emerald-50 text-emerald-600 rounded-full mb-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
+                        <svg xmlns="http://www.w3.org/2000/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.745 3.745 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                         </svg>
                     </div>
@@ -264,9 +264,10 @@
                     <p class="text-sm text-slate-500">กรุณากดโทรออกเพื่อประสานงานกับทีมฉุกเฉินทันทีค่ะ</p>
                 </div>
 
+                <!-- ย้ายปุ่มโทรด่วนมาไว้ที่นี่ -->
                 <div class="space-y-4 pt-2">
                     <a href="tel:1669" class="w-full flex flex-col items-center justify-center bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-6 rounded-2xl shadow-lg shadow-red-100 transition-all text-xl active:scale-95">
-                        <span class="text-2xl">🚨 โโทร 1669</span>
+                        <span class="text-2xl">🚨 โทร 1669</span>
                         <span class="text-xs font-light opacity-80 mt-1">(กดตรงนี้โทรออกทันที)</span>
                     </a>
                     
@@ -277,14 +278,12 @@
                 </div>
             </div>
 
-            <div class="flex justify-center items-center pt-6 mt-4 border-t border-slate-100 w-full">
+            <div class="flex justify-center items-center pt-6 mt-auto border-t border-slate-100">
                 <button onclick="location.reload()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-6 rounded-xl text-sm transition-all active:scale-95">
                     🔄 กลับไปหน้าแรก (ทำเคสใหม่)
                 </button>
             </div>
         </div>
-
-    </div>
 
     <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
@@ -297,6 +296,7 @@
             document.getElementById(`page${pageNumber}`).classList.add('active');
         }
 
+        // เอาโค้ดที่ปรับสีใหม่มาวางทับตรงนี้ได้เลยค่ะ 👇
         function renderOptions(pageId) {
             const container = document.getElementById(`options-${pageId}`);
             const options = [
@@ -308,7 +308,7 @@
             options.forEach(opt => {
                 const button = document.createElement('button');
                 button.type = 'button';
-                button.className = `w-full border-2 ${opt.color} font-medium py-3 px-4 rounded-xl transition-all text-left flex justify-between items-center option-btn active:scale-[0.98]`;
+                button.className = `w-full border-2 ${opt.color} font-medium py-3.5 px-4 rounded-xl transition-all text-left flex justify-between items-center option-btn active:scale-[0.98]`;
                 button.innerHTML = `<span>${opt.text}</span>`;
                 
                 button.onclick = () => {
@@ -329,6 +329,31 @@
             });
         };
 
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const disease = document.getElementById('disease').value || 'ไม่มี';
+            const unit = document.getElementById('unit').value;
+            const phone = document.getElementById('phone').value;
+            const lastTime = document.getElementById('lastNormalTime').value || 'ไม่ได้ระบุ';
+            // ดึงค่าหมายเหตุ ถ้าไม่ได้กรอกให้บันทึกว่า 'ไม่มี'
+            const note = document.getElementById('note').value || 'ไม่มี'; 
+
+            alert(`🎉 บันทึกข้อมูลสำเร็จ!\n\nข้อมูลผู้ป่วย:\nชื่อ: ${name}\nหน่วยปฏิบัติการ: ${unit}\nเวลาที่พบปกติล่าสุด: ${lastTime} น.\nหมายเหตุ: ${note}`);
+            
+            // ล้างฟอร์มรวมถึงช่องหมายเหตุด้วย
+            document.getElementById('patientForm').reset();
+            document.getElementById('lastNormalTime').value = '';
+            if(document.getElementById('timeResultBox')) {
+                document.getElementById('timeResultBox').classList.add('hidden');
+            }
+            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('ring-4', 'ring-blue-100', 'border-blue-500'));
+            for (let key in assessmentData) { assessmentData[key] = null; }
+            
+            navigateTo(9);
+        }
+// ฟังก์ชันคำนวณระยะเวลาต่างจากเวลาในมือถืออัตโนมัติ
         function calculateDuration() {
             const timeInput = document.getElementById('lastNormalTime').value;
             const resultBox = document.getElementById('timeResultBox');
@@ -336,14 +361,18 @@
 
             if (!timeInput) return;
 
+            // เอาเวลาในมือถือปัจจุบัน
             const now = new Date();
             const [hours, minutes] = timeInput.split(':');
             
+            // ตั้งค่าเวลาที่กรอกลงในวันปัจจุบัน
             const pickedTime = new Date();
             pickedTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
 
+            // คำนวณความต่าง (มิลลิวินาที)
             let diffMs = now - pickedTime;
 
+            // หากเวลาที่เลือกมากกว่าเวลาปัจจุบัน (สมมติว่าเป็นเวลาของเมื่อคืนข้ามวันมา)
             if (diffMs < 0) {
                 pickedTime.setDate(pickedTime.getDate() - 1);
                 diffMs = now - pickedTime;
@@ -355,16 +384,18 @@
 
             resultBox.classList.remove('hidden');
 
-            if (diffMins > 270) { 
+            // แสดงผลลัพธ์และเตือนเรื่อง Golden Hour (4.5 ชม.)
+            if (diffMins > 270) { // เกิน 4.5 ชั่วโมง
                 resultBox.className = "p-3 rounded-xl text-center font-medium text-sm bg-rose-50 border border-rose-200 text-rose-700";
                 resultText.innerHTML = `⏳ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>⚠️ เกินช่วง 4.5 ชม. (Golden Hour) `;
-            } else { 
+            } else { // ยังอยู่ในช่วง 4.5 ชั่วโมง
                 resultBox.className = "p-3 rounded-xl text-center font-medium text-sm bg-emerald-50 border border-emerald-200 text-emerald-700";
-                resultText.innerHTML = `⏱️ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>✅ ยังอยู่ในช่วง 4.5 ชม. (Golden Hour) เข้าเกณฑ์ Stroke Fast Track `;
+                resultText.innerHTML = `⏱️ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>✅ ยังอยู่ในช่วง 4.5 ชม. (Golden Hour) 
+                เข้าเกณฑ์ Stroke Fast Track `;
             }
         }
 
-        // 🔧 รวมฟังก์ชัน Submit ให้เสร็จสมบูรณ์ในที่เดียว ไม่ให้โค้ดตีกันเอง
+        // แก้ไขฟังก์ชัน Submit ฟอร์มให้เปลี่ยนไปหน้า 9
         function submitForm(event) {
             event.preventDefault();
             
@@ -373,18 +404,16 @@
             const unit = document.getElementById('unit').value;
             const phone = document.getElementById('phone').value;
             const lastTime = document.getElementById('lastNormalTime').value || 'ไม่ได้ระบุ';
-            const note = document.getElementById('note').value || 'ไม่มี'; 
 
-            alert(`🎉 บันทึกข้อมูลสำเร็จ!\n\nข้อมูลผู้ป่วย:\nชื่อ: ${name}\nหน่วยปฏิบัติการ: ${unit}\nเวลาที่พบปกติล่าสุด: ${lastTime} น.\nหมายเหตุ: ${note}`);
+            alert(`🎉 บันทึกข้อมูลสำเร็จ!\n\nข้อมูลผู้ป่วย:\nชื่อ: ${name}\nหน่วยปฏิบัติการ: ${unit}\nเวลาที่พบปกติล่าสุด: ${lastTime} น.`);
             
+            // ล้างฟอร์มและปุ่มเลือกตามปกติ
             document.getElementById('patientForm').reset();
             document.getElementById('lastNormalTime').value = '';
-            if(document.getElementById('timeResultBox')) {
-                document.getElementById('timeResultBox').classList.add('hidden');
-            }
+            document.getElementById('timeResultBox').classList.add('hidden');
             document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('ring-4', 'ring-blue-100', 'border-blue-500'));
-            for (let key in assessmentData) { assessmentData[key] = null; }
             
+            // ➡️ เดินหน้าไปหน้า 9 (หน้าปุ่มโทรออกด่วน)
             navigateTo(9);
         }
     </script>
