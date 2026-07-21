@@ -155,43 +155,41 @@
         </div>
 
 
-        <!-- ================= PAGE 7: TIME & EMERGENCY CALL ================= -->
+        <!-- ================= PAGE 7: TIME ASSESSMENT ================= -->
         <div id="page7" class="page flex-col justify-between h-full flex-1">
-            <div class="text-center space-y-6 my-auto">
-                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 7 จาก 8</span>
-                
-                <div class="space-y-2">
-                    <div class="text-5xl font-extrabold text-red-600">T</div>
-                    <div class="text-xl font-bold text-slate-800">Time (เวลา)</div>
-                    <p class="text-sm text-red-500 font-medium">หากพบอาการข้างต้นแม้เพียงอาการเดียว ให้รีบส่งโรงพยาบาลทันทีภายใน 4.5 ชั่วโมง!</p>
+            <div class="space-y-5 my-auto">
+                <div class="text-center">
+                    <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 7 จาก 9</span>
+                    <div class="text-5xl font-extrabold text-red-600 mt-2">T</div>
+                    <div class="text-xl font-bold text-slate-800">Time (เวลาที่เริ่มมีอาการ)</div>
+                    <p class="text-xs text-red-500 font-medium mt-1">หัวใจสำคัญ: ต้องระบุเวลาปกติครั้งสุดท้ายเพื่อคำนวณ Golden Hour</p>
                 </div>
 
-                <!-- ปุ่มโทรด่วนเน้นสีแดงเตือนภัย -->
-                <div class="space-y-4 pt-4">
-                    <a href="tel:1669" class="w-full flex flex-col items-center justify-center bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-6 rounded-2xl shadow-lg shadow-red-100 transition-all text-xl active:scale-95">
-                        <span class="text-2xl">🚨 โทร 1669</span>
-                        <span class="text-xs font-light opacity-80 mt-1">(กดตรงนี้โทรออกทันที)</span>
-                    </a>
-                    
-                    <a href="tel:0817080138" class="w-full flex flex-col items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-2xl shadow-md transition-all text-base active:scale-95">
-                        <span>📞 โทรประสาน รพศ. สว่างฯ</span>
-                        <span class="text-xs font-light opacity-90 mt-0.5">081-708-0138</span>
-                    </a>
+                <!-- กล่องกรอกเวลาและคำนวณ -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-4">
+                    <div>
+                        <label class="block text-slate-700 font-medium mb-1.5 text-sm">เวลาที่เห็นผู้ป่วยปกติครั้งสุดท้าย <span class="text-red-500">*</span></label>
+                        <input type="time" id="lastNormalTime" onchange="calculateDuration()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 text-lg font-semibold text-center text-slate-800">
+                    </div>
+
+                    <!-- กล่องแสดงผลลัพธ์การคำนวณอัตโนมัติ -->
+                    <div id="timeResultBox" class="hidden p-3 rounded-xl text-center font-medium text-sm transition-all">
+                        <p id="timeResultText"></p>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center pt-6 mt-auto border-t border-slate-100">
+            <div class="flex justify-between items-center pt-4 mt-auto border-t border-slate-100">
                 <button onclick="navigateTo(6)" class="text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center">◀ ย้อนกลับ</button>
                 <button onclick="navigateTo(8)" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">ระบุข้อมูลผู้ป่วย ▶</button>
             </div>
         </div>
 
-
         <!-- ================= PAGE 8: PATIENT DATA FORM ================= -->
         <div id="page8" class="page flex-col justify-between h-full flex-1">
             <div class="space-y-4">
                 <div class="text-center">
-                    <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 8 จาก 8</span>
+                    <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 8 จาก 9</span>
                     <h2 class="text-xl font-bold text-slate-800 mt-1">ระบุข้อมูลผู้ป่วย</h2>
                 </div>
 
@@ -234,7 +232,7 @@
                     </div>
 
                     <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3.5 px-6 rounded-xl shadow-md transition-all text-base mt-4 active:scale-95">
-                        ส่งข้อมูล
+                        ส่งข้อมูลและดูเบอร์โทรด่วน
                     </button>
                 </form>
             </div>
@@ -245,7 +243,41 @@
             </div>
         </div>
 
-    </div>
+        <!-- ================= PAGE 9: EMERGENCY CALLS (NEW PAGE) ================= -->
+        <div id="page9" class="page flex-col justify-between h-full flex-1">
+            <div class="text-center space-y-6 my-auto">
+                <span class="text-xs font-bold text-slate-400 tracking-wider">หน้า 9 จาก 9</span>
+                
+                <div class="space-y-2">
+                    <div class="inline-flex p-4 bg-emerald-50 text-emerald-600 rounded-full mb-1">
+                        <svg xmlns="http://www.w3.org/2000/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.745 3.745 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-800">บันทึกข้อมูลเรียบร้อยแล้ว</h2>
+                    <p class="text-sm text-slate-500">กรุณากดโทรออกเพื่อประสานงานกับทีมฉุกเฉินทันทีค่ะ</p>
+                </div>
+
+                <!-- ย้ายปุ่มโทรด่วนมาไว้ที่นี่ -->
+                <div class="space-y-4 pt-2">
+                    <a href="tel:1669" class="w-full flex flex-col items-center justify-center bg-red-600 hover:bg-red-700 text-white font-bold py-5 px-6 rounded-2xl shadow-lg shadow-red-100 transition-all text-xl active:scale-95">
+                        <span class="text-2xl">🚨 โทร 1669</span>
+                        <span class="text-xs font-light opacity-80 mt-1">(กดตรงนี้โทรออกทันที)</span>
+                    </a>
+                    
+                    <a href="tel:0817080138" class="w-full flex flex-col items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-2xl shadow-md transition-all text-base active:scale-95">
+                        <span>📞 โทรประสาน รพศ. สว่างฯ</span>
+                        <span class="text-xs font-light opacity-90 mt-0.5">081-708-0138</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center pt-6 mt-auto border-t border-slate-100">
+                <button onclick="location.reload()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-6 rounded-xl text-sm transition-all active:scale-95">
+                    🔄 กลับไปหน้าแรก (ทำเคสใหม่)
+                </button>
+            </div>
+        </div>
 
     <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
@@ -304,6 +336,68 @@
             document.getElementById('patientForm').reset();
             document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('ring-4', 'ring-blue-100', 'border-blue-500'));
             navigateTo(1);
+        }
+// ฟังก์ชันคำนวณระยะเวลาต่างจากเวลาในมือถืออัตโนมัติ
+        function calculateDuration() {
+            const timeInput = document.getElementById('lastNormalTime').value;
+            const resultBox = document.getElementById('timeResultBox');
+            const resultText = document.getElementById('timeResultText');
+
+            if (!timeInput) return;
+
+            // เอาเวลาในมือถือปัจจุบัน
+            const now = new Date();
+            const [hours, minutes] = timeInput.split(':');
+            
+            // ตั้งค่าเวลาที่กรอกลงในวันปัจจุบัน
+            const pickedTime = new Date();
+            pickedTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+
+            // คำนวณความต่าง (มิลลิวินาที)
+            let diffMs = now - pickedTime;
+
+            // หากเวลาที่เลือกมากกว่าเวลาปัจจุบัน (สมมติว่าเป็นเวลาของเมื่อคืนข้ามวันมา)
+            if (diffMs < 0) {
+                pickedTime.setDate(pickedTime.getDate() - 1);
+                diffMs = now - pickedTime;
+            }
+
+            const diffMins = Math.floor(diffMs / (1000 * 60));
+            const diffHours = Math.floor(diffMins / 60);
+            const remainingMins = diffMins % 60;
+
+            resultBox.classList.remove('hidden');
+
+            // แสดงผลลัพธ์และเตือนเรื่อง Golden Hour (4.5 ชม.)
+            if (diffMins > 270) { // เกิน 4.5 ชั่วโมง
+                resultBox.className = "p-3 rounded-xl text-center font-medium text-sm bg-rose-50 border border-rose-200 text-rose-700";
+                resultText.innerHTML = `⏳ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>⚠️ เกินช่วง 4.5 ชม. (Golden Hour) โปรดเร่งนำส่ง!`;
+            } else { // ยังอยู่ในช่วง 4.5 ชั่วโมง
+                resultBox.className = "p-3 rounded-xl text-center font-medium text-sm bg-emerald-50 border border-emerald-200 text-emerald-700";
+                resultText.innerHTML = `⏱️ ผ่านมาแล้ว <b>${diffHours} ชม. ${remainingMins} นาที</b><br>✅ ยังอยู่ในช่วง 4.5 ชม. (Golden Hour)`;
+            }
+        }
+
+        // แก้ไขฟังก์ชัน Submit ฟอร์มให้เปลี่ยนไปหน้า 9
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const disease = document.getElementById('disease').value || 'ไม่มี';
+            const unit = document.getElementById('unit').value;
+            const phone = document.getElementById('phone').value;
+            const lastTime = document.getElementById('lastNormalTime').value || 'ไม่ได้ระบุ';
+
+            alert(`🎉 บันทึกข้อมูลสำเร็จ!\n\nข้อมูลผู้ป่วย:\nชื่อ: ${name}\nหน่วยปฏิบัติการ: ${unit}\nเวลาที่พบปกติล่าสุด: ${lastTime} น.`);
+            
+            // ล้างฟอร์มและปุ่มเลือกตามปกติ
+            document.getElementById('patientForm').reset();
+            document.getElementById('lastNormalTime').value = '';
+            document.getElementById('timeResultBox').classList.add('hidden');
+            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('ring-4', 'ring-blue-100', 'border-blue-500'));
+            
+            // ➡️ เดินหน้าไปหน้า 9 (หน้าปุ่มโทรออกด่วน)
+            navigateTo(9);
         }
     </script>
 </body>
