@@ -247,7 +247,7 @@
 
     </div>
 
-    <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
         const assessmentData = { p2: null, p3: null, p4: null, p5: null, p6: null };
 
@@ -258,18 +258,19 @@
             document.getElementById(`page${pageNumber}`).classList.add('active');
         }
 
+        // เอาโค้ดที่ปรับสีใหม่มาวางทับตรงนี้ได้เลยค่ะ 👇
         function renderOptions(pageId) {
             const container = document.getElementById(`options-${pageId}`);
             const options = [
-                { text: '✓ มี', value: 'yes', color: 'border-red-200 hover:bg-red-50 text-red-600 bg-red-50/30' },
-                { text: '✗ ไม่มี', value: 'no', color: 'border-slate-200 hover:bg-slate-50 text-slate-600' },
+                { text: '✓ มีอาการ', value: 'yes', color: 'border-emerald-200 hover:bg-emerald-50 text-emerald-600 bg-emerald-50/30' },
+                { text: '✗ ไม่มีอาการ', value: 'no', color: 'border-rose-200 hover:bg-rose-50 text-rose-600 bg-rose-50/30' },
                 { text: 'ไม่แน่ใจ', value: 'not-sure', color: 'border-amber-200 hover:bg-amber-50 text-amber-600 bg-amber-50/30' }
             ];
 
             options.forEach(opt => {
                 const button = document.createElement('button');
                 button.type = 'button';
-                button.className = `w-full border-2 ${opt.color} font-medium py-3 px-4 rounded-xl transition-all text-left flex justify-between items-center option-btn active:scale-[0.98]`;
+                button.className = `w-full border-2 ${opt.color} font-medium py-3.5 px-4 rounded-xl transition-all text-left flex justify-between items-center option-btn active:scale-[0.98]`;
                 button.innerHTML = `<span>${opt.text}</span>`;
                 
                 button.onclick = () => {
