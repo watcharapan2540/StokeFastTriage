@@ -402,27 +402,92 @@
             }
         }
 
-        // แก้ไขฟังก์ชัน Submit ฟอร์มให้เปลี่ยนไปหน้า 9
-        function submitForm(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const disease = document.getElementById('disease').value || 'ไม่มี';
-            const unit = document.getElementById('unit').value;
-            const phone = document.getElementById('phone').value;
-            const lastTime = document.getElementById('lastNormalTime').value || 'ไม่ได้ระบุ';
+        // ส่งข้อมูลผู้ป่วยเข้า Google Sheets
+async function submitForm(event) {
+    event.preventDefault();
 
-            alert(`🎉 บันทึกข้อมูลสำเร็จ!\n\nข้อมูลผู้ป่วย:\nชื่อ: ${name}\nหน่วยปฏิบัติการ: ${unit}\nเวลาที่พบปกติล่าสุด: ${lastTime} น.`);
-            
-            // ล้างฟอร์มและปุ่มเลือกตามปกติ
-            document.getElementById('patientForm').reset();
-            document.getElementById('lastNormalTime').value = '';
-            document.getElementById('timeResultBox').classList.add('hidden');
-            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('ring-4', 'ring-blue-100', 'border-blue-500'));
-            
-            // ➡️ เดินหน้าไปหน้า 9 (หน้าปุ่มโทรออกด่วน)
-            navigateTo(9);
+    const submitButton = event.target.querySelector('button[type="submit"]');
+    const originalText = submitButton.innerHTML;
+
+    submitButton.disabled = true;
+    submitButton.innerHTML = 'กำลังบันทึก...';
+
+    const name = document.getElementById('name').value;
+    const disease = document.getElementById('disease').value || 'ไม่มี';
+    const unit = document.getElementById('unit').value;
+    const phone = document.getElementById('phone').value;
+    const lastTime =
+        document.getElementById('lastNormalTime').value || 'ไม่ได้ระบุ';
+
+    const noteElement = document.getElementById('note');
+    const note = noteElement ? noteElement.value || 'ไม่มี' : 'ไม่มี';
+
+    function translateAnswer(answer) {
+        if (answer === 'yes') return 'มี';
+        if (answer === 'no') return 'ไม่มี';
+        if (answer === 'not-sure') return 'ไม่แน่ใจ';
+        return 'ไม่ได้ประเมิน';
+    }
+
+    const formData = new URLSearchParams();
+
+    formData.append('name', name);
+    formData.append('disease', disease);
+    formData.append('unit', unit);
+    formData.append('phone', phone);
+    formData.append('lastTime', lastTime);
+    formData.append('balance', translateAnswer(assessmentData.p2));
+    formData.append('eyes', translateAnswer(assessmentData.p3));
+    formData.append('face', translateAnswer(assessmentData.p4));
+    formData.append('arm', translateAnswer(assessmentData.p5));
+    formData.append('speech', translateAnswer(assessmentData.p6));
+    formData.append('note', note);
+
+    try {
+        await fetch(
+            'https://script.google.com/macros/s/AKfycbwfJ3788STR2sapM-2QLsOQ9-r1OuiElSk8ja785ccVfKJT8Qq_PCA8pfq7jfYiE3LL/exec',
+            {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            }
+        );
+
+        alert('✅ บันทึกข้อมูลไปยัง รพ.เรียบร้อยแล้ว');
+
+        document.getElementById('patientForm').reset();
+
+        const timeResultBox = document.getElementById('timeResultBox');
+        if (timeResultBox) {
+            timeResultBox.classList.add('hidden');
         }
+
+        document.querySelectorAll('.option-btn').forEach(function (button) {
+            button.classList.remove(
+                'ring-4',
+                'ring-blue-100',
+                'border-blue-500'
+            );
+        });
+
+        for (const key in assessmentData) {
+            assessmentData[key] = null;
+        }
+
+        navigateTo(9);
+
+    } catch (error) {
+        console.error(error);
+        alert('❌ บันทึกไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ต');
+
+    } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalText;
+    }
+}
     <!-- ป้องกันดับเบิลแตะและ pinch zoom บน iPhone -->
         let lastTouchEnd = 0;
         
